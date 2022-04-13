@@ -24,7 +24,12 @@
     dest: /tmp/awscli-v2
     owner: root
     group: wheel
-    mode: 0744
 
 - name: Install awscli version 2
   command: /tmp/awscli-v2/aws/install
+
+- name: Ensure symlinks can reach the aws binaries
+  file:
+    path: /usr/local/aws-cli/v2/current/dist
+    state: directory
+    mode: 0755
