@@ -1,2 +1,30 @@
 ---
-# tasks file for ansible-role-aws
+
+- name: Ensure awscli via yum is removed
+  yum:
+    name: awscli
+    state: absent
+
+- name: Ensure dependencies are installed
+  yum:
+    name: [glibc, groff, less, unzip]
+    state: present
+
+- name: Create temporary working directory for installing awscli
+  file:
+    path: /tmp/awscli-v2
+    state: directory
+    owner: root
+    group: wheel
+    mode: 0755
+
+- name: Download and unarchive awscli version 2 zip file
+  unarchive:
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    dest: /tmp/awscli-v2
+    owner: root
+    group: wheel
+    mode: 0744
+
+- name: Install awscli version 2
+  command: /tmp/awscli-v2/aws/install
