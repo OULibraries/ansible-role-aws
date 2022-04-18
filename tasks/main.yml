@@ -25,9 +25,14 @@
     owner: root
     group: wheel
 
-- name: Install awscli version 2
+- name: Check to see if awscli version 2 is installed
+  command: /usr/local/bin/aws --version
+  register: awscli_installed
+  changed_when: false
+
+- name: Install awscli version 2 if not already present
   command: /tmp/awscli-v2/aws/install
-  creates: /usr/local/bin/aws
+  when: awscli_installed.rc == "0"
 
 - name: Ensure symlinks can reach the aws binaries
   file:
