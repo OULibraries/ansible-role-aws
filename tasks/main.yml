@@ -37,7 +37,7 @@
 
 - name: Install awscli version 2 if not already present
   command: /tmp/awscli-v2/aws/install
-  when: awscliv2_present.rc != "0"
+  when: awscliv2_present is failed
 
 - name: Ensure symlinks can reach the aws binaries
   file:
