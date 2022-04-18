@@ -24,6 +24,7 @@
     dest: /tmp/awscli-v2
     owner: root
     group: wheel
+    remote_src: true
 
 # This task is necessary to ensure the task that actually installs
 # awscli (the next task) doesn't fail and cause the role to exit
