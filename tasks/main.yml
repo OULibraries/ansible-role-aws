@@ -1,6 +1,6 @@
 ---
 
-- name: Ensure awscli via yum is removed
+- name: Ensure yum-managed version of awscli is removed
   yum:
     name: awscli
     state: absent
@@ -20,19 +20,23 @@
 
 - name: Download and unarchive awscli version 2 zip file
   unarchive:
-    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ awscli_version }}.zip"
     dest: /tmp/awscli-v2
     owner: root
     group: wheel
 
-- name: Check to see if awscli version 2 is installed
+# This task is necessary to ensure the task that actually installs
+# awscli (the next task) doesn't fail and cause the role to exit
+# without completing. Another method would have been to ignore
+# the failures, but I'm not so sure that's a good idea.
+- name: Check to see if awscli version 2 is already installed
   command: /usr/local/bin/aws --version
-  register: awscli_installed
+  register: awscliv2_present
   changed_when: false
 
 - name: Install awscli version 2 if not already present
   command: /tmp/awscli-v2/aws/install
-  when: awscli_installed.rc == "0"
+  when: awscliv2_present.rc == "0"
 
 - name: Ensure symlinks can reach the aws binaries
   file:
