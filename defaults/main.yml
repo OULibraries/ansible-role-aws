@@ -1,3 +1,4 @@
 ---
 
 awscli_version: "2.5.5"
+awscli_clean_previous_versions: false

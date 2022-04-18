@@ -36,10 +36,17 @@
 
 - name: Install awscli version 2 if not already present
   command: /tmp/awscli-v2/aws/install
-  when: awscliv2_present.rc != "1"
+  when: awscliv2_present.rc != "0"
 
 - name: Ensure symlinks can reach the aws binaries
   file:
     path: /usr/local/aws-cli/v2/current/dist
     state: directory
     mode: 0755
+
+- name: Remove all prior version of awscli version 2 besides current
+  command: >
+    find /usr/local/aws-cli/v2/ -mindepth 1 -maxdepth 1
+    ! -name "{{ awscli_version }}" -type d -print
+    -exec rm -rf {} \;
+  when: awscli_clean_previous_versions
