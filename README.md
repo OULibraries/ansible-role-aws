@@ -1,7 +1,7 @@
-Role Name
+OULibraries.aws
 =========
 
-A brief description of the role goes here.
+A role that handles the installation and management of the AWS-packaged version of the `awscli` tool (version 2).
 
 Requirements
 ------------
