@@ -13,8 +13,8 @@ Role Variables
 
 There are currently only two variables (located in `defaults/main.yml`). Because they are set by default, they should only occasionally need to be modified or overridden. The variables are:
 
-`awscli_version` - Rather than installing the most current version of the AWS-managed package
-`awscli_clean_previous_versions` - By default, this value is set to false. If it is set to `true`, it will perform a task that will delete all previous version of the awscli located in `/usr/local/aws-cli/v2/`. It is recommended that this value only be set to true using the `--extra-vars` argument when running any associated playbooks. 
+`awscli_version: `                 - Rather than installing the most current version of the AWS-managed package
+`awscli_clean_previous_versions: ` - By default, this value is set to false. If it is set to `true`, it will perform a task that will delete all previous version of the awscli located in `/usr/local/aws-cli/v2/`. It is recommended that this value only be set to true using the `--extra-vars` argument when running any associated playbooks. 
 
 Dependencies
 ------------
