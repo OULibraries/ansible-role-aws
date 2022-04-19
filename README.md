@@ -33,7 +33,7 @@ Example Playbook
 License
 -------
 
-[MIT](https://github.com/OULibraries/ansible-role-centos7/blob/master/LICENSE)
+[MIT](https://github.com/OULibraries/ansible-role-awscli/blob/main/LICENSE)
 
 Author Information
 ------------------
