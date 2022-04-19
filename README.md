@@ -6,33 +6,34 @@ A role that handles the installation and management of the AWS-packaged version 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The `unzip` package is required to make use of the `unarchive` module, but it is installed by the role before the unarchive task is needed.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+There are currently only two variables (located in `defaults/main.yml`). Because they are set by default, they should only occasionally need to be modified or overridden. The variables are:
+
+`awscli_version` - Rather than installing the most current version of the AWS-managed package
+`awscli_clean_previous_versions` - By default, this value is set to false. If it is set to `true`, it will perform a task that will delete all previous version of the awscli located in `/usr/local/aws-cli/v2/`. It is recommended that this value only be set to true using the `--extra-vars` argument when running any associated playbooks. 
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role does not depend on any other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: OULibraries.aws
 
 License
 -------
 
-BSD
+[MIT](https://github.com/OULibraries/ansible-role-centos7/blob/master/LICENSE)
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+James Mitchell
